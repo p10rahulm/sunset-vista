@@ -9,6 +9,7 @@ def current_datetime(request):
     html= "<html><body>It is now %s.</body></html>" % now
     return HttpResponse(html)
 
+
 def hours_ahead(request,hours_ahead):
     try:
         offset = int(hours_ahead)
