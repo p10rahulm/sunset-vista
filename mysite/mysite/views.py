@@ -1,6 +1,7 @@
 from django.http import HttpResponse,Http404
 from django.template.loader import get_template
 from django.shortcuts import render
+from collections import defaultdict
 
 import datetime
 
@@ -14,7 +15,13 @@ def current_datetime(request):
     #return HttpResponse(html)
     return render(request,'current_datetime.html',{'current_date': now})
 
-
+def display_meta(request):
+    values = request.META
+    html = []
+    print(values)
+    for k in sorted(values.keys()):
+        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, values[k]))
+    return HttpResponse('<table>%s</table>' % '\n'.join(html))
 
 def hours_ahead(request,hours_ahead):
     try:
